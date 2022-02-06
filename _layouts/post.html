@@ -1,46 +1,67 @@
----
-layout: default
----
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-  </header>
+<!-- Post Layout Start -->
 
-  <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
-  </div>
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
 
-  <p class="post-meta">
-    {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-    {%- if page.modified_date -%}
-      {%- assign mdate = page.modified_date | date_to_xmlschema -%}
-      <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
-        Last Updated on {{ mdate | date: date_format }}
-      </time>
-    {%- else -%}
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }}
-      </time>
-    {%- endif -%} 
-    {%- if page.author -%}
-      • {% for author in page.author %}
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
-          {%- if forloop.last == false %}, {% endif -%}
-      {% endfor %}
-    {%- endif -%}
-  </p>
-  
+  {% include head.html %}
 
-  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
-</article>
+  <body>
+
+    {% include navigation.html %}
+
+    <section id="post" class="container content-section text-center">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+          {% include swipe-instructions.html %}
+
+          <h1><strong>{{ page.title }}</strong></h1>
+          <h4>
+            <strong>{{ page.date | date_to_string }}</strong>
+            <small>
+              . category:
+              <a class="category" href="{{site.baseurl}}/categories/{{page.category | downcase}}.html">
+                {{ page.category }}
+              </a>.
+              <a href="{{site.baseurl}}{{page.url }}#disqus_thread">Comments</a>
+              <br />
+              {% for tag in page.tags %}
+                <a class="tag" href="{{site.baseurl}}/tags/{{tag | downcase}}.html">#{{ tag }}</a>
+              {% endfor %}
+            </small>
+          </h4>
+
+          <section class="text-justify">
+            {{ page.content | markdownify }}
+          </section>
+
+          {% include share.html %}
+
+          {% if jekyll.environment == "production" %}
+            {% include comments.html %}
+          {% endif %}
 
 
-{%- if site.hyvor_talk_website_id -%}
-  <div class="comments">
-    {%- include hyvor-talk-comments.html -%}
-  </div>
-{%- endif -%}
+          <hr />
 
+          {% if site.author_blurb %}
+          <div class="author row">
+            <img class="col-xs-4 col-sm-3 col-md-2" src="{{site.baseurl}}{{site.author_blurb_image}}" alt="Me" />
+            <p class="col-xs-8 col-sm-9 col-md-10">
+              {{ site.author_blurb }}
+            </p>
+          </div>
+          {% endif%}
+        </div>
+      </div>
+    </section>
 
+    {% include footer.html %}
+
+    {% include js.html %}
+
+  </body>
+</html>
+
+<!-- Post Layout End -->
