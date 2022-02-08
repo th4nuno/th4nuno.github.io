@@ -1,6 +1,6 @@
 # Site
 title:              Th4Nuno
-bio:                'A Personal Website about Hacking'
+bio:                'Mi Página Personal sobre Hacking'  
 description:        "Moon is a minimal, one column jekyll theme for your blog."
 reading_time:       true
 words_per_minute:   200
@@ -38,7 +38,7 @@ sass:
   #ad-slot:
 #bing-verify:
 #email:
-twitter:            username
+twitter:            BrunoCS_32 
 #facebook:           username
 github-url:         th4nuno 
 #stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link

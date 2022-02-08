@@ -1,1 +1,216 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="https://th4nuno.github.io/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://th4nuno.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://th4nuno.github.io/" rel="alternate" type="text/html" /><updated>2022-02-07T11:05:35-03:00</updated><id>https://th4nuno.github.io/</id><title type="html">Th4Nuno</title><subtitle>Moon is a minimal, one column jekyll theme for your blog.</subtitle><entry><title type="html">WFuzz for Dummies</title><link href="https://th4nuno.github.io/WFuzz-For-Dummies/" rel="alternate" type="text/html" title="WFuzz for Dummies" /><published>2022-02-06T00:00:00-03:00</published><updated>2022-02-06T00:00:00-03:00</updated><id>https://th4nuno.github.io/WFuzz-For-Dummies</id><content type="html" xml:base="https://th4nuno.github.io/WFuzz-For-Dummies/">&lt;p&gt;Hola&lt;/p&gt;</content><category term="fuzzing" /><category term="pentesting" /><category term="tools" /><category term="web" /><summary type="html">Fuzzing is one of the most important things a pentester would know about, and WFuzz puts it as easy as possible for them, with a lot of incredible functionalities to facilitate the recognaissement job.</summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="https://th4nuno.github.io/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://th4nuno.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://th4nuno.github.io/" rel="alternate" type="text/html" /><updated>2022-02-08T16:03:11-03:00</updated><id>https://th4nuno.github.io/</id><title type="html">Th4Nuno</title><subtitle>Moon is a minimal, one column jekyll theme for your blog.</subtitle><entry><title type="html">Aprende a Usar Wfuzz</title><link href="https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/" rel="alternate" type="text/html" title="Aprende a Usar Wfuzz" /><published>2022-02-06T00:00:00-03:00</published><updated>2022-02-06T00:00:00-03:00</updated><id>https://th4nuno.github.io/Aprende-a-Usar-Wfuzz</id><content type="html" xml:base="https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/">&lt;h1 id=&quot;qué-es-wfuzz&quot;&gt;¿Qué es Wfuzz?&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Wfuzz&lt;/strong&gt; es una herramienta que nos permite hacer &lt;strong&gt;fuzzing&lt;/strong&gt; a una página web, reemplazando la palabra clave &lt;strong&gt;FUZZ&lt;/strong&gt; con un tipo de &lt;strong&gt;payload&lt;/strong&gt;, que puede ser una lista de directorios, un rango de números, entre otras más opciones. Tambien nos permite hacer un escaneo recursivo, seguir las redirecciones para obtener el código de estado final y más cosas que las iremos viendo en este post.&lt;/p&gt;
+
+&lt;h1 id=&quot;como-instalar-wfuzz&quot;&gt;Como Instalar Wfuzz&lt;/h1&gt;
+
+&lt;h4 id=&quot;muy-lindo-todo-pero-como-instalo-wfuzz&quot;&gt;Muy lindo todo, pero… ¿Como instalo Wfuzz?&lt;/h4&gt;
+
+&lt;p&gt;Depende de en que sistema operativo te encuentres. Lo que yo recomiendo es que si querés hacer pentesting te instales Kali Linux o Parrot (yo utilizo Parrot), que son sistemas especializados en Hacking Ético que traen por defecto una gran cantidad de herramientas, entre ellas Wfuzz.&lt;/p&gt;
+
+&lt;p&gt;De forma alternativa, se puede descargar fácilmente haciendo uso del siguiente comando (teniendo Python instalado):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pip install wfuzz&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;como-usar-wfuzz&quot;&gt;Como Usar Wfuzz&lt;/h1&gt;
+
+&lt;h2 id=&quot;fuzzing-con-diccionarios&quot;&gt;Fuzzing con Diccionarios&lt;/h2&gt;
+
+&lt;p&gt;Bien, ahora que ya lo tenemos instalado, vamos a ver como se usa:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wfuzz --hc&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;404 -u &lt;span class=&quot;s2&quot;&gt;&quot;https://google.com/FUZZ&quot;&lt;/span&gt; -w /usr/share/wordlists/wfuzz/general/common.txt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;En el comando de arriba lo que hice fue realizar un escaneo en la página web de google.com, especificando la URL con el parametro &lt;em&gt;-u&lt;/em&gt;, utilizando un diccionario de directorios que trae Wfuzz por defecto con &lt;em&gt;-w&lt;/em&gt;. Además con &lt;em&gt;–hc&lt;/em&gt; escondí el código 404 (Not Found) del output, porque los directorios que no existen no me sirven de nada.&lt;/p&gt;
+
+&lt;p&gt;Esto es lo que me devolvió:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;********************************************************&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Wfuzz 3.1.0 - The Web Fuzzer                         &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;********************************************************&lt;/span&gt;
+
+Target: https://google.com/FUZZ
+Total requests: 951
+
+&lt;span class=&quot;o&quot;&gt;=====================================================================&lt;/span&gt;
+ID           Response   Lines    Word       Chars       Payload
+&lt;span class=&quot;o&quot;&gt;=====================================================================&lt;/span&gt;
+
+000000015:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;2001&quot;&lt;/span&gt;
+000000019:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;2005&quot;&lt;/span&gt;
+000000018:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;2004&quot;&lt;/span&gt;
+000000017:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;2003&quot;&lt;/span&gt;
+000000016:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;2002&quot;&lt;/span&gt;
+000000029:   301        6 L      14 W       227 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;account&quot;&lt;/span&gt;
+000000025:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;about&quot;&lt;/span&gt;
+000000021:   301        6 L      14 W       221 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;
+000000031:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;action&quot;&lt;/span&gt;
+000000066:   301        6 L      14 W       229 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;appliance&quot;&lt;/span&gt;
+000000070:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;apps&quot;&lt;/span&gt;
+000000113:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;blog&quot;&lt;/span&gt;
+000000130:   301        6 L      14 W       228 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;business&quot;&lt;/span&gt;
+000000184:   301        6 L      14 W       228 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;commerce&quot;&lt;/span&gt;
+000000203:   301        6 L      14 W       227 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;contact&quot;&lt;/span&gt;
+000000204:   301        6 L      14 W       228 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;contacts&quot;&lt;/span&gt;
+000000220:   301        6 L      14 W       231 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;creditcards&quot;&lt;/span&gt;
+000000226:   301        6 L      14 W       229 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;customers&quot;&lt;/span&gt;
+000000255:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;design&quot;&lt;/span&gt;
+000000262:   301        6 L      14 W       230 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;developers&quot;&lt;/span&gt;
+000000279:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;docs&quot;&lt;/span&gt;
+000000265:   301        6 L      14 W       227 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;devices&quot;&lt;/span&gt;
+000000264:   302        9 L      18 W       216 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;device&quot;&lt;/span&gt;
+000000286:   301        6 L      14 W       229 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;downloads&quot;&lt;/span&gt;
+000000314:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;errors&quot;&lt;/span&gt;
+000000309:   301        6 L      14 W       230 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;enterprise&quot;&lt;/span&gt;
+000000342:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;files&quot;&lt;/span&gt;
+000000366:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;games&quot;&lt;/span&gt;
+000000370:   301        6 L      14 W       223 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;get&quot;&lt;/span&gt;
+000000400:   301        6 L      14 W       228 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;homepage&quot;&lt;/span&gt;
+000000399:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;home&quot;&lt;/span&gt;
+000000380:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;groups&quot;&lt;/span&gt;
+000000416:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;inbox&quot;&lt;/span&gt;
+000000413:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;images&quot;&lt;/span&gt;
+000000397:   302        0 L      0 W        0 Ch        &lt;span class=&quot;s2&quot;&gt;&quot;history&quot;&lt;/span&gt;
+000000465:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;labs&quot;&lt;/span&gt;
+000000460:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;keep&quot;&lt;/span&gt;
+000000456:   301        6 L      14 W       222 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;js&quot;&lt;/span&gt;
+000000498:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;mail&quot;&lt;/span&gt;
+000000565:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;null&quot;&lt;/span&gt;
+000000558:   302        0 L      0 W        0 Ch        &lt;span class=&quot;s2&quot;&gt;&quot;news&quot;&lt;/span&gt;
+000000551:   301        6 L      14 W       230 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;navigation&quot;&lt;/span&gt;
+000000546:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;music&quot;&lt;/span&gt;
+000000576:   301        6 L      14 W       222 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;on&quot;&lt;/span&gt;
+000000632:   301        6 L      14 W       227 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;preview&quot;&lt;/span&gt;
+000000631:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;press&quot;&lt;/span&gt;
+000000611:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;phone&quot;&lt;/span&gt;
+000000605:   301        6 L      14 W       223 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;pdf&quot;&lt;/span&gt;
+000000602:   301        6 L      14 W       228 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;password&quot;&lt;/span&gt;
+000000656:   301        6 L      14 W       229 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;publisher&quot;&lt;/span&gt;
+000000689:   301        6 L      14 W       228 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;research&quot;&lt;/span&gt;
+000000695:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;retail&quot;&lt;/span&gt;
+000000714:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;script&quot;&lt;/span&gt;
+000000736:   301        6 L      14 W       228 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;services&quot;&lt;/span&gt;
+000000724:   301        6 L      14 W       228 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;security&quot;&lt;/span&gt;
+000000710:   302        0 L      0 W        0 Ch        &lt;span class=&quot;s2&quot;&gt;&quot;saved&quot;&lt;/span&gt;
+000000717:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;search&quot;&lt;/span&gt;
+000000763:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;sites&quot;&lt;/span&gt;
+000000799:   301        6 L      14 W       227 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;student&quot;&lt;/span&gt;
+000000797:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;story&quot;&lt;/span&gt;
+000000796:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;store&quot;&lt;/span&gt;
+000000808:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;support&quot;&lt;/span&gt;
+000000810:   301        6 L      14 W       226 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;survey&quot;&lt;/span&gt;
+000000616:   400        9 L      14 W       145 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;ping&quot;&lt;/span&gt;
+000000839:   301        6 L      14 W       227 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;toolbar&quot;&lt;/span&gt;
+000000826:   301        6 L      14 W       229 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;templates&quot;&lt;/span&gt;
+000000885:   301        6 L      14 W       225 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;views&quot;&lt;/span&gt;
+000000913:   301        6 L      14 W       229 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;webmaster&quot;&lt;/span&gt;
+000000930:   301        6 L      14 W       224 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;work&quot;&lt;/span&gt;
+000000709:   302        0 L      0 W        0 Ch        &lt;span class=&quot;s2&quot;&gt;&quot;save&quot;&lt;/span&gt;
+000000840:   302        9 L      18 W       211 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;tools&quot;&lt;/span&gt;
+
+Total &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;: 3.595023
+Processed Requests: 951
+Filtered Requests: 880
+Requests/sec.: 264.5323&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ademas de &lt;em&gt;–hc&lt;/em&gt; existen otras formas de esconder algunos resultados, porque a veces hay páginas que no nos sirven que resuelven todas el mismo resultado. Estas son:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;--hl/hw/hh: Esconde las respuestas con un determinado numero de lineas/palabras/caracteres&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Como ven arriba casi todas las respuestas que obtuvimos tienen un total de 6 lineas, por lo tanto, si escondemos este número, obtendremos menos resultados:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wfuzz --hc&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;404 --hl&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;6 -u &lt;span class=&quot;s2&quot;&gt;&quot;https://google.com/FUZZ&quot;&lt;/span&gt; -w /usr/share/wordlists/wfuzz/general/common.txt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;********************************************************&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Wfuzz 3.1.0 - The Web Fuzzer                         &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;********************************************************&lt;/span&gt;
+
+Target: https://google.com/FUZZ
+Total requests: 951
+
+&lt;span class=&quot;o&quot;&gt;=====================================================================&lt;/span&gt;
+ID           Response   Lines    Word       Chars       Payload                                                                                                                     
+&lt;span class=&quot;o&quot;&gt;=====================================================================&lt;/span&gt;
+
+000000264:   302        9 L      18 W       216 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;device&quot;&lt;/span&gt;                                                                                                                    
+000000397:   302        0 L      0 W        0 Ch        &lt;span class=&quot;s2&quot;&gt;&quot;history&quot;&lt;/span&gt;                                                                                                                   
+000000558:   302        0 L      0 W        0 Ch        &lt;span class=&quot;s2&quot;&gt;&quot;news&quot;&lt;/span&gt;                                                                                                                      
+000000616:   400        9 L      14 W       145 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;ping&quot;&lt;/span&gt;                                                                                                                      
+000000840:   302        9 L      18 W       211 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;tools&quot;&lt;/span&gt;                                                                                                                     
+000000709:   302        0 L      0 W        0 Ch        &lt;span class=&quot;s2&quot;&gt;&quot;save&quot;&lt;/span&gt;                                                                                                                      
+000000710:   302        0 L      0 W        0 Ch        &lt;span class=&quot;s2&quot;&gt;&quot;saved&quot;&lt;/span&gt;                                                                                                                     
+
+Total &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;: 0
+Processed Requests: 951
+Filtered Requests: 944
+Requests/sec.: 0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Si miramos el código de respuesta, solo “ping” nos devuelve un número diferente a &lt;em&gt;302&lt;/em&gt;. Como sabemos que los códigos 301 y 302 son para las redirecciones, podriamos probar a seguirlas con el parámetro &lt;em&gt;-L&lt;/em&gt;, para ver en que páginas terminamos.&lt;/p&gt;
+
+&lt;p&gt;Como este parámetro se va a ejecutar antes de esconder el número de líneas, nos mostrará todas las páginas que teniamos al principio. Asi que para obtener solo los resultados de las últimas páginas, vamos a jugar un poco con otro payload de Wfuzz.&lt;/p&gt;
+
+&lt;p&gt;Vamos a guardar nuestro escaneo con el nombre “fuzzing” para usarlo luego:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wfuzz --hc&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;404 --hl&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;6 -u &lt;span class=&quot;s2&quot;&gt;&quot;https://google.com/FUZZ&quot;&lt;/span&gt; -w /usr/share/wordlists/wfuzz/general/common.txt --oF fuzzing&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ahora, utilizando el payload &lt;strong&gt;wfuzzp&lt;/strong&gt; vamos a seguir las redirecciones del escaneo anterior. Para consultar los payloads es tan fácil como usar el comando &lt;em&gt;“wfuzz -e payloads”&lt;/em&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wfuzz -z wfuzzp,fuzzing -L FUZZ&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;********************************************************&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Wfuzz 3.1.0 - The Web Fuzzer                         &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;********************************************************&lt;/span&gt;
+
+Target: FUZZ
+Total requests: &lt;span class=&quot;sh&quot;&gt;&amp;lt;&amp;lt;unknown&amp;gt;&amp;gt;
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                     
+=====================================================================
+
+000000264:   400        0 L      70 W       1681 Ch     &quot;https://accounts.google.com/o/oauth2/legacy/device/usercode?rt=&quot;                                                                                         
+000000616:   400        9 L      14 W       145 Ch      &quot;https://google.com/ping&quot;                                                                                                   
+000000709:   200        56 L     6191 W     453285 Ch   &quot;https://www.google.com/save&quot;                                                                                               
+000000558:   200        1826 L   37305 W    1624121 C   &quot;https://news.google.com/topstories?hl=en-US&amp;amp;gl=US&amp;amp;ceid=US:en&quot;                                                              
+                                            h                                                                                                                                       
+000000840:   200        2316 L   16996 W    301468 Ch   &quot;https://www.google.com/chrome/&quot;                                                                                            
+000000397:   200        519 L    4002 W     191032 Ch   &quot;https://myactivity.google.com/?continue=https://myactivity.google.com/myactivity&quot;                                          
+000000710:   200        56 L     6191 W     453302 Ch   &quot;https://www.google.com/saved&quot;                                                                                              
+
+Total time: 1.606515
+Processed Requests: 7
+Filtered Requests: 0
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Requests/sec.: 4.357257&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Al especificar la URL da un error, pero con solo colocar la palabra FUZZ esto se arregla. El payload se especifica con el parámetro &lt;em&gt;-z&lt;/em&gt; acompañado de la ubicación en donde se encuentra el archivo que guardamos de la sesión anterior. Hay que tener en cuenta de que las respuestas no están en el mismo orden que antes.&lt;/p&gt;
+
+&lt;p&gt;Este payload es muy situacional, por lo tanto no es necesario indagar en él demasiado, aunque está bueno conocerlos todos porque pueden llegar a ser necesarios en algún momento. Ahora vamos a utilizar dos de ellos, los cuales en mi opinión son los más útiles.&lt;/p&gt;
+
+&lt;h2 id=&quot;payloads&quot;&gt;Payloads&lt;/h2&gt;
+
+&lt;p&gt;Wfuzz también es muy útil para hacer un bruteforcing simple, cuando no queremos complicarnos demasiado ni la situación lo requiere. Vamos a ver un ejemplo:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wfuzz -c -z file,users.txt -z file,pass.txt --sc 200 -d &lt;span class=&quot;s2&quot;&gt;&quot;name=FUZZ&amp;amp;password=FUZ2Z&amp;amp;autologin=1&amp;amp;enter=Sign+in&quot;&lt;/span&gt; http://zipper.htb/zabbix/index.php&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Utilizando un payload &lt;strong&gt;file&lt;/strong&gt;, podemos llamar a un archivo con credenciales y con el parámetro &lt;em&gt;-d&lt;/em&gt; especificamos la información que mandaremos por POST. Cuando colocamos múltiples payloads el primer dato se nombra como FUZZ y luego al resto se le añade un número a partir de 2. Luego con &lt;em&gt;–sc&lt;/em&gt; solo obtendremos las respuestas con el código que hayamos ingresado, que en este caso es 200 (Ok). Tambien he añadido el parámetro &lt;em&gt;-c&lt;/em&gt;, que muestra el output con colores y queda mucho mejor.&lt;/p&gt;
+
+&lt;p&gt;Ahora vamos a ver el otro payload:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wfuzz -c -z range,0-10 --sc 200,301 &lt;span class=&quot;s2&quot;&gt;&quot;http://zipper.htb/zabbix/index.php?id=FUZZ&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;En este payload &lt;strong&gt;range&lt;/strong&gt; utilizaremos GET, para esto solo tenemos que colocar la palabra clave &lt;strong&gt;FUZZ&lt;/strong&gt; dentro de la URL en el parámetro que corresponda y especificar el rango de números con el cual queremos hacer el fuzzing. He añadido el código de respuesta &lt;em&gt;301&lt;/em&gt; pero esto es sólo para mostrarles que se pueden añadir varios datos, no es necesario.&lt;/p&gt;
+
+&lt;h3 id=&quot;para-terminar&quot;&gt;Para terminar…&lt;/h3&gt;
+
+&lt;p&gt;Vamos a ver otros parámetros muy útiles, los cuales todavía no he nombrado:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;-f&lt;/em&gt;: Guardar el escaneo dentro de un archivo leíble.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;-p&lt;/em&gt;: Especificar un proxy. Esto es muy util por ejemplo cuando queremos ver las peticiones a través de Burpsuite.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;-t&lt;/em&gt;: Especificar la cantidad de threads con los cuales el escaneo se realizará. Hay que tener cuidado con este parámetro ya que un numero muy alto puede llegar a saturar el servidor.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;-R&lt;/em&gt;: Escoger un nivel de recursión. Este número será la profundidad de directorios en los cuales haremos fuzzing. Por ejemplo con un número 2 no solo hará fuzzing al directorio raíz sino tomará los casos encontrados y hará un escaneo dentro de ellos.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;-b&lt;/em&gt;: Añadir una cookie a las peticiones. Podemos colocar varias cookies repitiendo el mismo parámetro varias veces.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;-H&lt;/em&gt;: Ajustar los headers, por ejemplo el User Agent, Host, etc.&lt;/p&gt;</content><category term="fuzzing" /><category term="pentesting" /><category term="tools" /><category term="web" /><summary type="html">El fuzzing es una de las labores más importantes que un pentester debería saber, y Wfuzz pone esta tarea lo más fácil posible con una increíble herramienta que nos trae todo lo necesario para hacerlo</summary></entry></feed>

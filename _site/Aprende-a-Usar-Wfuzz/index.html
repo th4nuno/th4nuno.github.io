@@ -1,0 +1,132 @@
+<!DOCTYPE html> <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--> <!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--> <!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--> <!--[if gt IE 8]><!--> <html class="no-js"><!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"> <title>Aprende a Usar Wfuzz &#8211; Th4Nuno</title> <meta name="description" content="Moon is a minimal, one column jekyll theme for your blog."> <meta name="keywords" content="fuzzing, pentesting, tools, web"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:image" content="https://th4nuno.github.io/assets/img/posts/wfuzz.jpg"> <meta name="twitter:title" content="Aprende a Usar Wfuzz"> <meta name="twitter:description" content="El fuzzing es una de las labores más importantes que un pentester debería saber, y Wfuzz pone esta tarea lo más fácil posible con una increíble herramienta que nos trae todo lo necesario para hacerlo"> <meta name="twitter:site" content="@BrunoCS_32"> <meta name="twitter:creator" content="@BrunoCS_32"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Aprende a Usar Wfuzz"> <meta property="og:description" content="El fuzzing es una de las labores más importantes que un pentester debería saber, y Wfuzz pone esta tarea lo más fácil posible con una increíble herramienta que nos trae todo lo necesario para hacerlo"> <meta property="og:url" content="https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/"> <meta property="og:site_name" content="Th4Nuno"> <meta property="og:image" content="https://th4nuno.github.io/assets/img/logo.png"> <link rel="canonical" href="https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/"> <link href="https://th4nuno.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Th4Nuno Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="https://th4nuno.github.io/assets/css/main.css"> <!-- JS --> <script src="https://th4nuno.github.io/assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="https://th4nuno.github.io/assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="https://th4nuno.github.io/assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="https://th4nuno.github.io/assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="https://th4nuno.github.io/assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="https://th4nuno.github.io/favicon.png" /> <link rel="shortcut icon" href="https://th4nuno.github.io/favicon.ico" /> <!-- Background Image --> <style type="text/css">body {background-image:url(https://th4nuno.github.io/assets/img/placeholder-big.jpg); background-repeat: no-repeat; background-size: cover; }</style> <!-- Post Feature Image --> <style type="text/css">.feature {background-image:url(https://th4nuno.github.io/assets/img/posts/wfuzz.jpg);}</style> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="https://th4nuno.github.io/">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="https://th4nuno.github.io/assets/img/logo.png" alt="Th4Nuno photo" class="author-photo"> <h4>Th4Nuno</h4> <p>Moon is a minimal, one column jekyll theme for your blog.</p> </li> <li><a href="https://th4nuno.github.io/about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="http://twitter.com/BrunoCS_32" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a> </li> <li> <a href="http://github.com/th4nuno" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> </ul><!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="https://th4nuno.github.io/posts/">All Posts</a></li> <li><a href="https://th4nuno.github.io/tags/">All Tags</a></li> </ul> </li> <li><a href="https://th4nuno.github.io/projects/" >Projects</a></li> </ul><!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title feature "> <h1>Aprende a Usar Wfuzz</h1> <h4>06 Feb 2022</h4> <p class="reading-time"> <i class="fa fa-clock-o"></i> Reading time ~9 minutes </p><!-- /.entry-reading-time --> <a class="btn zoombtn" href="https://th4nuno.github.io/posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <h1 id="qué-es-wfuzz">¿Qué es Wfuzz?</h1> <p><strong>Wfuzz</strong> es una herramienta que nos permite hacer <strong>fuzzing</strong> a una página web, reemplazando la palabra clave <strong>FUZZ</strong> con un tipo de <strong>payload</strong>, que puede ser una lista de directorios, un rango de números, entre otras más opciones. Tambien nos permite hacer un escaneo recursivo, seguir las redirecciones para obtener el código de estado final y más cosas que las iremos viendo en este post.</p> <h1 id="como-instalar-wfuzz">Como Instalar Wfuzz</h1> <h4 id="muy-lindo-todo-pero-como-instalo-wfuzz">Muy lindo todo, pero… ¿Como instalo Wfuzz?</h4> <p>Depende de en que sistema operativo te encuentres. Lo que yo recomiendo es que si querés hacer pentesting te instales Kali Linux o Parrot (yo utilizo Parrot), que son sistemas especializados en Hacking Ético que traen por defecto una gran cantidad de herramientas, entre ellas Wfuzz.</p> <p>De forma alternativa, se puede descargar fácilmente haciendo uso del siguiente comando (teniendo Python instalado):</p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip install wfuzz</code></pre></figure> <h1 id="como-usar-wfuzz">Como Usar Wfuzz</h1> <h2 id="fuzzing-con-diccionarios">Fuzzing con Diccionarios</h2> <p>Bien, ahora que ya lo tenemos instalado, vamos a ver como se usa:</p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash">wfuzz --hc<span class="o">=</span>404 -u <span class="s2">"https://google.com/FUZZ"</span> -w /usr/share/wordlists/wfuzz/general/common.txt</code></pre></figure> <p>En el comando de arriba lo que hice fue realizar un escaneo en la página web de google.com, especificando la URL con el parametro <em>-u</em>, utilizando un diccionario de directorios que trae Wfuzz por defecto con <em>-w</em>. Además con <em>–hc</em> escondí el código 404 (Not Found) del output, porque los directorios que no existen no me sirven de nada.</p> <p>Esto es lo que me devolvió:</p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">********************************************************</span>
+<span class="k">*</span> Wfuzz 3.1.0 - The Web Fuzzer                         <span class="k">*</span>
+<span class="k">********************************************************</span>
+
+Target: https://google.com/FUZZ
+Total requests: 951
+
+<span class="o">=====================================================================</span>
+ID           Response   Lines    Word       Chars       Payload
+<span class="o">=====================================================================</span>
+
+000000015:   301        6 L      14 W       224 Ch      <span class="s2">"2001"</span>
+000000019:   301        6 L      14 W       224 Ch      <span class="s2">"2005"</span>
+000000018:   301        6 L      14 W       224 Ch      <span class="s2">"2004"</span>
+000000017:   301        6 L      14 W       224 Ch      <span class="s2">"2003"</span>
+000000016:   301        6 L      14 W       224 Ch      <span class="s2">"2002"</span>
+000000029:   301        6 L      14 W       227 Ch      <span class="s2">"account"</span>
+000000025:   301        6 L      14 W       225 Ch      <span class="s2">"about"</span>
+000000021:   301        6 L      14 W       221 Ch      <span class="s2">"a"</span>
+000000031:   301        6 L      14 W       226 Ch      <span class="s2">"action"</span>
+000000066:   301        6 L      14 W       229 Ch      <span class="s2">"appliance"</span>
+000000070:   301        6 L      14 W       224 Ch      <span class="s2">"apps"</span>
+000000113:   301        6 L      14 W       224 Ch      <span class="s2">"blog"</span>
+000000130:   301        6 L      14 W       228 Ch      <span class="s2">"business"</span>
+000000184:   301        6 L      14 W       228 Ch      <span class="s2">"commerce"</span>
+000000203:   301        6 L      14 W       227 Ch      <span class="s2">"contact"</span>
+000000204:   301        6 L      14 W       228 Ch      <span class="s2">"contacts"</span>
+000000220:   301        6 L      14 W       231 Ch      <span class="s2">"creditcards"</span>
+000000226:   301        6 L      14 W       229 Ch      <span class="s2">"customers"</span>
+000000255:   301        6 L      14 W       226 Ch      <span class="s2">"design"</span>
+000000262:   301        6 L      14 W       230 Ch      <span class="s2">"developers"</span>
+000000279:   301        6 L      14 W       224 Ch      <span class="s2">"docs"</span>
+000000265:   301        6 L      14 W       227 Ch      <span class="s2">"devices"</span>
+000000264:   302        9 L      18 W       216 Ch      <span class="s2">"device"</span>
+000000286:   301        6 L      14 W       229 Ch      <span class="s2">"downloads"</span>
+000000314:   301        6 L      14 W       226 Ch      <span class="s2">"errors"</span>
+000000309:   301        6 L      14 W       230 Ch      <span class="s2">"enterprise"</span>
+000000342:   301        6 L      14 W       225 Ch      <span class="s2">"files"</span>
+000000366:   301        6 L      14 W       225 Ch      <span class="s2">"games"</span>
+000000370:   301        6 L      14 W       223 Ch      <span class="s2">"get"</span>
+000000400:   301        6 L      14 W       228 Ch      <span class="s2">"homepage"</span>
+000000399:   301        6 L      14 W       224 Ch      <span class="s2">"home"</span>
+000000380:   301        6 L      14 W       226 Ch      <span class="s2">"groups"</span>
+000000416:   301        6 L      14 W       225 Ch      <span class="s2">"inbox"</span>
+000000413:   301        6 L      14 W       226 Ch      <span class="s2">"images"</span>
+000000397:   302        0 L      0 W        0 Ch        <span class="s2">"history"</span>
+000000465:   301        6 L      14 W       224 Ch      <span class="s2">"labs"</span>
+000000460:   301        6 L      14 W       224 Ch      <span class="s2">"keep"</span>
+000000456:   301        6 L      14 W       222 Ch      <span class="s2">"js"</span>
+000000498:   301        6 L      14 W       224 Ch      <span class="s2">"mail"</span>
+000000565:   301        6 L      14 W       224 Ch      <span class="s2">"null"</span>
+000000558:   302        0 L      0 W        0 Ch        <span class="s2">"news"</span>
+000000551:   301        6 L      14 W       230 Ch      <span class="s2">"navigation"</span>
+000000546:   301        6 L      14 W       225 Ch      <span class="s2">"music"</span>
+000000576:   301        6 L      14 W       222 Ch      <span class="s2">"on"</span>
+000000632:   301        6 L      14 W       227 Ch      <span class="s2">"preview"</span>
+000000631:   301        6 L      14 W       225 Ch      <span class="s2">"press"</span>
+000000611:   301        6 L      14 W       225 Ch      <span class="s2">"phone"</span>
+000000605:   301        6 L      14 W       223 Ch      <span class="s2">"pdf"</span>
+000000602:   301        6 L      14 W       228 Ch      <span class="s2">"password"</span>
+000000656:   301        6 L      14 W       229 Ch      <span class="s2">"publisher"</span>
+000000689:   301        6 L      14 W       228 Ch      <span class="s2">"research"</span>
+000000695:   301        6 L      14 W       226 Ch      <span class="s2">"retail"</span>
+000000714:   301        6 L      14 W       226 Ch      <span class="s2">"script"</span>
+000000736:   301        6 L      14 W       228 Ch      <span class="s2">"services"</span>
+000000724:   301        6 L      14 W       228 Ch      <span class="s2">"security"</span>
+000000710:   302        0 L      0 W        0 Ch        <span class="s2">"saved"</span>
+000000717:   301        6 L      14 W       226 Ch      <span class="s2">"search"</span>
+000000763:   301        6 L      14 W       225 Ch      <span class="s2">"sites"</span>
+000000799:   301        6 L      14 W       227 Ch      <span class="s2">"student"</span>
+000000797:   301        6 L      14 W       225 Ch      <span class="s2">"story"</span>
+000000796:   301        6 L      14 W       225 Ch      <span class="s2">"store"</span>
+000000808:   301        6 L      14 W       226 Ch      <span class="s2">"support"</span>
+000000810:   301        6 L      14 W       226 Ch      <span class="s2">"survey"</span>
+000000616:   400        9 L      14 W       145 Ch      <span class="s2">"ping"</span>
+000000839:   301        6 L      14 W       227 Ch      <span class="s2">"toolbar"</span>
+000000826:   301        6 L      14 W       229 Ch      <span class="s2">"templates"</span>
+000000885:   301        6 L      14 W       225 Ch      <span class="s2">"views"</span>
+000000913:   301        6 L      14 W       229 Ch      <span class="s2">"webmaster"</span>
+000000930:   301        6 L      14 W       224 Ch      <span class="s2">"work"</span>
+000000709:   302        0 L      0 W        0 Ch        <span class="s2">"save"</span>
+000000840:   302        9 L      18 W       211 Ch      <span class="s2">"tools"</span>
+
+Total <span class="nb">time</span>: 3.595023
+Processed Requests: 951
+Filtered Requests: 880
+Requests/sec.: 264.5323</code></pre></figure> <p>Ademas de <em>–hc</em> existen otras formas de esconder algunos resultados, porque a veces hay páginas que no nos sirven que resuelven todas el mismo resultado. Estas son:</p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash">--hl/hw/hh: Esconde las respuestas con un determinado numero de lineas/palabras/caracteres</code></pre></figure> <p>Como ven arriba casi todas las respuestas que obtuvimos tienen un total de 6 lineas, por lo tanto, si escondemos este número, obtendremos menos resultados:</p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash">wfuzz --hc<span class="o">=</span>404 --hl<span class="o">=</span>6 -u <span class="s2">"https://google.com/FUZZ"</span> -w /usr/share/wordlists/wfuzz/general/common.txt</code></pre></figure> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">********************************************************</span>
+<span class="k">*</span> Wfuzz 3.1.0 - The Web Fuzzer                         <span class="k">*</span>
+<span class="k">********************************************************</span>
+
+Target: https://google.com/FUZZ
+Total requests: 951
+
+<span class="o">=====================================================================</span>
+ID           Response   Lines    Word       Chars       Payload                                                                                                                     
+<span class="o">=====================================================================</span>
+
+000000264:   302        9 L      18 W       216 Ch      <span class="s2">"device"</span>                                                                                                                    
+000000397:   302        0 L      0 W        0 Ch        <span class="s2">"history"</span>                                                                                                                   
+000000558:   302        0 L      0 W        0 Ch        <span class="s2">"news"</span>                                                                                                                      
+000000616:   400        9 L      14 W       145 Ch      <span class="s2">"ping"</span>                                                                                                                      
+000000840:   302        9 L      18 W       211 Ch      <span class="s2">"tools"</span>                                                                                                                     
+000000709:   302        0 L      0 W        0 Ch        <span class="s2">"save"</span>                                                                                                                      
+000000710:   302        0 L      0 W        0 Ch        <span class="s2">"saved"</span>                                                                                                                     
+
+Total <span class="nb">time</span>: 0
+Processed Requests: 951
+Filtered Requests: 944
+Requests/sec.: 0</code></pre></figure> <p>Si miramos el código de respuesta, solo “ping” nos devuelve un número diferente a <em>302</em>. Como sabemos que los códigos 301 y 302 son para las redirecciones, podriamos probar a seguirlas con el parámetro <em>-L</em>, para ver en que páginas terminamos.</p> <p>Como este parámetro se va a ejecutar antes de esconder el número de líneas, nos mostrará todas las páginas que teniamos al principio. Asi que para obtener solo los resultados de las últimas páginas, vamos a jugar un poco con otro payload de Wfuzz.</p> <p>Vamos a guardar nuestro escaneo con el nombre “fuzzing” para usarlo luego:</p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash">wfuzz --hc<span class="o">=</span>404 --hl<span class="o">=</span>6 -u <span class="s2">"https://google.com/FUZZ"</span> -w /usr/share/wordlists/wfuzz/general/common.txt --oF fuzzing</code></pre></figure> <p>Ahora, utilizando el payload <strong>wfuzzp</strong> vamos a seguir las redirecciones del escaneo anterior. Para consultar los payloads es tan fácil como usar el comando <em>“wfuzz -e payloads”</em></p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash">wfuzz -z wfuzzp,fuzzing -L FUZZ</code></pre></figure> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">********************************************************</span>
+<span class="k">*</span> Wfuzz 3.1.0 - The Web Fuzzer                         <span class="k">*</span>
+<span class="k">********************************************************</span>
+
+Target: FUZZ
+Total requests: <span class="sh">&lt;&lt;unknown&gt;&gt;
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                     
+=====================================================================
+
+000000264:   400        0 L      70 W       1681 Ch     "https://accounts.google.com/o/oauth2/legacy/device/usercode?rt="                                                                                         
+000000616:   400        9 L      14 W       145 Ch      "https://google.com/ping"                                                                                                   
+000000709:   200        56 L     6191 W     453285 Ch   "https://www.google.com/save"                                                                                               
+000000558:   200        1826 L   37305 W    1624121 C   "https://news.google.com/topstories?hl=en-US&amp;gl=US&amp;ceid=US:en"                                                              
+                                            h                                                                                                                                       
+000000840:   200        2316 L   16996 W    301468 Ch   "https://www.google.com/chrome/"                                                                                            
+000000397:   200        519 L    4002 W     191032 Ch   "https://myactivity.google.com/?continue=https://myactivity.google.com/myactivity"                                          
+000000710:   200        56 L     6191 W     453302 Ch   "https://www.google.com/saved"                                                                                              
+
+Total time: 1.606515
+Processed Requests: 7
+Filtered Requests: 0
+</span><span class="err">Requests/sec.: 4.357257</span></code></pre></figure> <p>Al especificar la URL da un error, pero con solo colocar la palabra FUZZ esto se arregla. El payload se especifica con el parámetro <em>-z</em> acompañado de la ubicación en donde se encuentra el archivo que guardamos de la sesión anterior. Hay que tener en cuenta de que las respuestas no están en el mismo orden que antes.</p> <p>Este payload es muy situacional, por lo tanto no es necesario indagar en él demasiado, aunque está bueno conocerlos todos porque pueden llegar a ser necesarios en algún momento. Ahora vamos a utilizar dos de ellos, los cuales en mi opinión son los más útiles.</p> <h2 id="payloads">Payloads</h2> <p>Wfuzz también es muy útil para hacer un bruteforcing simple, cuando no queremos complicarnos demasiado ni la situación lo requiere. Vamos a ver un ejemplo:</p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash">wfuzz -c -z file,users.txt -z file,pass.txt --sc 200 -d <span class="s2">"name=FUZZ&amp;password=FUZ2Z&amp;autologin=1&amp;enter=Sign+in"</span> http://zipper.htb/zabbix/index.php</code></pre></figure> <p>Utilizando un payload <strong>file</strong>, podemos llamar a un archivo con credenciales y con el parámetro <em>-d</em> especificamos la información que mandaremos por POST. Cuando colocamos múltiples payloads el primer dato se nombra como FUZZ y luego al resto se le añade un número a partir de 2. Luego con <em>–sc</em> solo obtendremos las respuestas con el código que hayamos ingresado, que en este caso es 200 (Ok). Tambien he añadido el parámetro <em>-c</em>, que muestra el output con colores y queda mucho mejor.</p> <p>Ahora vamos a ver el otro payload:</p> <figure class="highlight"><pre><code class="language-bash" data-lang="bash">wfuzz -c -z range,0-10 --sc 200,301 <span class="s2">"http://zipper.htb/zabbix/index.php?id=FUZZ"</span></code></pre></figure> <p>En este payload <strong>range</strong> utilizaremos GET, para esto solo tenemos que colocar la palabra clave <strong>FUZZ</strong> dentro de la URL en el parámetro que corresponda y especificar el rango de números con el cual queremos hacer el fuzzing. He añadido el código de respuesta <em>301</em> pero esto es sólo para mostrarles que se pueden añadir varios datos, no es necesario.</p> <h3 id="para-terminar">Para terminar…</h3> <p>Vamos a ver otros parámetros muy útiles, los cuales todavía no he nombrado:</p> <p><em>-f</em>: Guardar el escaneo dentro de un archivo leíble.</p> <p><em>-p</em>: Especificar un proxy. Esto es muy util por ejemplo cuando queremos ver las peticiones a través de Burpsuite.</p> <p><em>-t</em>: Especificar la cantidad de threads con los cuales el escaneo se realizará. Hay que tener cuidado con este parámetro ya que un numero muy alto puede llegar a saturar el servidor.</p> <p><em>-R</em>: Escoger un nivel de recursión. Este número será la profundidad de directorios en los cuales haremos fuzzing. Por ejemplo con un número 2 no solo hará fuzzing al directorio raíz sino tomará los casos encontrados y hará un escaneo dentro de ellos.</p> <p><em>-b</em>: Añadir una cookie a las peticiones. Podemos colocar varias cookies repitiendo el mismo parámetro varias veces.</p> <p><em>-H</em>: Ajustar los headers, por ejemplo el User Agent, Host, etc.</p> <div class="entry-meta"> <br> <hr> <span class="entry-tags"><a href="https://th4nuno.github.io/tags/#fuzzing" title="Pages tagged fuzzing" class="tag"><span class="term">fuzzing</span></a><a href="https://th4nuno.github.io/tags/#pentesting" title="Pages tagged pentesting" class="tag"><span class="term">pentesting</span></a><a href="https://th4nuno.github.io/tags/#tools" title="Pages tagged tools" class="tag"><span class="term">tools</span></a><a href="https://th4nuno.github.io/tags/#web" title="Pages tagged web" class="tag"><span class="term">web</span></a></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Share</span> </a> <a href="https://twitter.com/intent/tweet?text=https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="https://th4nuno.github.io/assets/js/jquery-1.12.0.min.js"></script> <script src="https://th4nuno.github.io/assets/js/jquery.dlmenu.min.js"></script> <script src="https://th4nuno.github.io/assets/js/jquery.goup.min.js"></script> <script src="https://th4nuno.github.io/assets/js/jquery.magnific-popup.min.js"></script> <script src="https://th4nuno.github.io/assets/js/jquery.fitvid.min.js"></script> <script src="https://th4nuno.github.io/assets/js/scripts.js"></script> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>
